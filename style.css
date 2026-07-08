@@ -1,0 +1,130 @@
+/* Premium Interface Theme Variables Framework */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --text-title: #0f172a;
+    --text-body: #475569;
+    --border-color: #e2e8f0;
+    --star-empty: #e2e8f0;
+}
+
+/* Light / Dark Mode Overrides (FEATURE 9) */
+body.bg-light-mode {
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --text-title: #0f172a;
+    --text-body: #475569;
+    --border-color: #e2e8f0;
+    --star-empty: #cbd5e1;
+}
+
+body.bg-dark-mode {
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --text-title: #f8fafc;
+    --text-body: #94a3b8;
+    --border-color: #334155;
+    --star-empty: #475569;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-body);
+}
+
+.transition-theme {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.text-dark-title { color: var(--text-title) !important; }
+.card-title-text { color: var(--text-title) !important; }
+.text-light-star { color: var(--star-empty) !important; }
+.text-secondary-white { color: rgba(255, 255, 255, 0.75); }
+
+/* FEATURE 1: Search Panel Layout Constraint */
+.custom-search-width {
+    width: 38%;
+}
+@media (max-width: 991px) {
+    .custom-search-width { width: 100%; }
+}
+
+/* View Sections Routing Configuration */
+.view-section {
+    display: none;
+    animation: smoothDisplay 0.4s ease-out forwards;
+}
+.view-section.active {
+    display: block;
+}
+
+@keyframes smoothDisplay {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Card Styling Frameworks */
+.hero-banner {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
+
+.section-card {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 16px !important;
+}
+
+.product-card {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 16px !important;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08) !important;
+}
+
+.product-card .img-wrapper {
+    width: 100%;
+    height: 190px;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.02);
+}
+
+.product-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover img {
+    transform: scale(1.04);
+}
+
+/* FEATURE 7: Gradient Receipt Alignment */
+.summary-gradient-box {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+}
+
+.cart-row {
+    transition: background-color 0.2s ease;
+}
+.cart-row:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.form-control, .form-select, .btn {
+    border-radius: 10px !important;
+}
+
+.table {
+    --bs-table-bg: transparent;
+    color: var(--text-title);
+}

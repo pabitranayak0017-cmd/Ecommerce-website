@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftShop | Advanced Premium E-Commerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light-mode transition-theme">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top py-3 shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-warning fs-4" href="#" onclick="showView('landing-page')">
+                <i class="bi bi-lightning-charge-fill"></i> SwiftShop
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="mx-auto my-2 my-lg-0 custom-search-width">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+                        <input type="text" id="global-search" class="form-control border-start-0" placeholder="Search products directly..." oninput="handleSearch()">
+                    </div>
+                </div>
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item me-2">
+                        <button class="btn btn-outline-light btn-sm rounded-circle px-2" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+                            <i id="theme-icon" class="bi bi-moon-stars-fill"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item"><a class="nav-link text-white px-2" href="#" onclick="showView('landing-page')">Home</a></li>
+                    <li class="nav-item" id="nav-wishlist"><a class="nav-link text-white px-2 position-relative" href="#" onclick="showView('wishlist-page')">Wishlist <span id="wishlist-count" class="badge bg-danger rounded-pill">0</span></a></li>
+                    <li class="nav-item" id="nav-add-product" style="display:none;"><a class="nav-link text-warning px-2" href="#" onclick="showView('add-product-page')">Add Product</a></li>
+                    <li class="nav-item" id="nav-orders" style="display:none;"><a class="nav-link text-info px-2" href="#" onclick="showView('orders-page')">My Orders</a></li>
+                    <li class="nav-item" id="nav-login"><a class="nav-link text-white-50 px-2" href="#" onclick="showView('login-page')">Login</a></li>
+                    <li class="nav-item" id="nav-signup"><a class="nav-link text-white-50 px-2" href="#" onclick="showView('signup-page')">Signup</a></li>
+                    <li class="nav-item" id="nav-user" style="display:none;"><span class="nav-link text-light fw-semibold px-2" id="user-display"></span></li>
+                    <li class="nav-item" id="nav-logout" style="display:none;"><a class="nav-link text-danger px-2" href="#" onclick="handleLogout()">Logout</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <button class="btn btn-warning position-relative px-4 fw-medium" onclick="showView('cart-page')">
+                            <i class="bi bi-cart3 me-1"></i> Cart
+                            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5" style="min-height: 75vh;">
+
+        <section id="signup-page" class="view-section">
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <div class="card shadow border-0 p-3 section-card">
+                        <div class="card-body">
+                            <h3 class="card-title text-center mb-4 fw-bold card-title-text">Create Account</h3>
+                            <form id="signup-form">
+                                <div class="mb-3">
+                                    <label class="form-label text-secondary small fw-semibold">Full Name</label>
+                                    <input type="text" id="signup-name" class="form-control" placeholder="John Doe" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label text-secondary small fw-semibold">Email address</label>
+                                    <input type="email" id="signup-email" class="form-control" placeholder="name@example.com" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label text-secondary small fw-semibold">Password</label>
+                                    <input type="password" id="signup-password" class="form-control" placeholder="••••••••" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 py-2.5 mt-2 fw-medium">Sign Up</button>
+                            </form>
+                            <p class="text-center mt-4 mb-0 text-muted small">Already have an account? <a href="#" onclick="showView('login-page')" class="text-decoration-none fw-medium">Login</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="login-page" class="view-section">
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <div class="card shadow border-0 p-3 section-card">
+                        <div class="card-body">
+                            <h3 class="card-title text-center mb-4 fw-bold card-title-text">Welcome Back</h3>
+                            <form id="login-form">
+                                <div class="mb-3">
+                                    <label class="form-label text-secondary small fw-semibold">Email address</label>
+                                    <input type="email" id="login-email" class="form-control" placeholder="name@example.com" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label text-secondary small fw-semibold">Password</label>
+                                    <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 py-2.5 mt-2 fw-medium">Log In</button>
+                            </form>
+                            <p class="text-center mt-4 mb-0 text-muted small">Don't have an account? <a href="#" onclick="showView('signup-page')" class="text-decoration-none fw-medium">Sign Up</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="landing-page" class="view-section active">
+            <div class="p-5 mb-5 text-white rounded-4 shadow-sm hero-banner">
+                <div class="container-fluid py-4">
+                    <h1 class="display-5 fw-bold text-warning mb-3">Exclusive Tech & Trends</h1>
+                    <p class="col-md-8 fs-5 text-secondary-white mb-0">Discover our updated lineup of premium laptops, elite gear, and flagship essentials.</p>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap g-3">
+                <h3 class="fw-bold mb-0 text-dark-title">Featured Products</h3>
+                <div class="btn-group shadow-sm" role="group">
+                    <button type="button" class="btn btn-dark category-btn active" onclick="filterCategory('All')">All</button>
+                    <button type="button" class="btn btn-outline-dark category-btn" onclick="filterCategory('Electronics')">Electronics</button>
+                    <button type="button" class="btn btn-outline-dark category-btn" onclick="filterCategory('Lifestyle')">Lifestyle</button>
+                </div>
+            </div>
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="products-container">
+                </div>
+        </section>
+
+        <section id="wishlist-page" class="view-section">
+            <h3 class="fw-bold mb-4 text-dark-title"><i class="bi bi-heart-fill text-danger me-2"></i>My Wishlist Favorites</h3>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="wishlist-container">
+                </div>
+        </section>
+
+        <section id="add-product-page" class="view-section">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card shadow border-0 p-3 section-card">
+                        <div class="card-body">
+                            <h3 class="card-title text-center mb-4 fw-bold card-title-text">Inventory Management</h3>
+                            <form id="add-product-form">
+                                <div class="mb-3">
+                                    <label class="form-label text-secondary small fw-semibold">Product Name</label>
+                                    <input type="text" id="prod-name" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label text-secondary small fw-semibold">Price ($)</label>
+                                    <input type="number" id="prod-price" class="form-control" step="0.01" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label text-secondary small fw-semibold">Category Type</label>
+                                    <select id="prod-category" class="form-select" required>
+                                        <option value="Electronics">Electronics</option>
+                                        <option value="Lifestyle">Lifestyle</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label text-secondary small fw-semibold">Upload Product Image File</label>
+                                    <input type="file" id="prod-image-file" class="form-control" accept="image/*" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label text-secondary small fw-semibold">Description</label>
+                                    <textarea id="prod-desc" class="form-control" rows="3" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100 py-2.5 mt-2 fw-medium">Publish Product</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cart-page" class="view-section">
+            <h3 class="fw-bold mb-4 text-dark-title"><i class="bi bi-cart3 me-2"></i>Your Shopping Cart</h3>
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="card shadow-sm border-0 p-4 rounded-4 section-card">
+                        <div id="cart-items-container">
+                            </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card shadow-sm border-0 p-4 rounded-4 section-card">
+                        <h5 class="fw-bold mb-3 card-title-text">Order Summary</h5>
+                        <hr class="text-muted">
+                        <div class="mb-4">
+                            <label class="form-label text-secondary small fw-semibold">Apply Discount Coupon</label>
+                            <div class="input-group">
+                                <input type="text" id="coupon-input" class="form-control" placeholder="Enter % value (e.g. 90%)">
+                                <button class="btn btn-dark px-3" type="button" onclick="applyCoupon()">Apply</button>
+                            </div>
+                            <div id="coupon-message" class="small mt-2"></div>
+                        </div>
+                        <hr class="text-muted">
+                        <div class="d-flex justify-content-between mb-2 text-muted">
+                            <span>Subtotal</span>
+                            <span id="cart-subtotal" class="fw-semibold text-dark-title">$0.00</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2 text-danger" id="discount-row" style="display:none !important;">
+                            <span>Discount (<span id="coupon-percent">0</span>%)</span>
+                            <span id="cart-discount">-$0.00</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-4 fs-5 fw-bold text-dark-title pt-2 border-top">
+                            <span>Total</span>
+                            <span id="cart-total" class="text-primary">$0.00</span>
+                        </div>
+                        <button class="btn btn-warning w-100 py-2.5 fw-semibold shadow-sm" onclick="goToCheckout()">Proceed to Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="checkout-page" class="view-section">
+            <div class="row g-4">
+                <div class="col-md-7">
+                    <div class="card shadow-sm border-0 p-4 rounded-4 section-card">
+                        <h4 class="fw-bold mb-4 card-title-text">Billing & Delivery</h4>
+                        <form id="checkout-form">
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <label class="form-label text-secondary small fw-semibold">First name</label>
+                                    <input type="text" class="form-control" required>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label text-secondary small fw-semibold">Last name</label>
+                                    <input type="text" class="form-control" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label text-secondary small fw-semibold">Shipping Address</label>
+                                    <input type="text" class="form-control" placeholder="1234 Luxury Way" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label text-secondary small fw-semibold">Credit Card Details</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light text-muted"><i class="bi bi-credit-card-2-front"></i></span>
+                                        <input type="text" class="form-control" placeholder="0000 0000 0000 0000" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4 text-muted">
+                            <button class="btn btn-primary w-100 py-2.5 fw-medium shadow-sm" type="submit">Authorize Secure Payment</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="card shadow-sm border-0 p-4 rounded-4 text-white summary-gradient-box">
+                        <h5 class="fw-medium text-white-50">Grand Final Invoice Total</h5>
+                        <div class="display-5 fw-bold my-3" id="checkout-final-total">$0.00</div>
+                        <div class="p-3 bg-white bg-opacity-10 rounded-3 mt-3">
+                            <h6 class="fw-bold mb-2 text-warning"><i class="bi bi-receipt-cutoff me-1"></i> Quick Items Breakdown</h6>
+                            <div id="checkout-breakdown-items" class="small text-white-50">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="orders-page" class="view-section">
+            <h3 class="fw-bold mb-4 text-dark-title"><i class="bi bi-box-seam-fill text-primary me-2"></i>Order Procurement History</h3>
+            <div class="card shadow-sm border-0 p-4 rounded-4 section-card">
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead>
+                            <tr class="text-muted small border-bottom">
+                                <th>Order ID</th>
+                                <th>Timestamp Date</th>
+                                <th>Items Count</th>
+                                <th>Invoice Grand Total</th>
+                                <th>Procurement Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-history-tbody">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1060;">
+        <div id="app-toast" class="toast align-items-center text-white bg-dark border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body d-flex align-items-center">
+                    <i id="toast-icon" class="bi bi-info-circle-fill me-2"></i>
+                    <span id="toast-msg"></span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4 border-top border-secondary mt-5">
+        <div class="container">
+            <p class="mb-0 small text-secondary">&copy; 2026 SwiftShop Inc. Advanced Handcrafted Architecture.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
